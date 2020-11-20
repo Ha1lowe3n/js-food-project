@@ -233,27 +233,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
       form.insertAdjacentElement('afterend', statusMessage);
 
-      const request = new XMLHttpRequest();
-      request.open('POST', 'server.php');
-
       //  Заголовок не нужен при XMLHttpRequest + FormData, он назначается автоматически
-      request.setRequestHeader('Content-type', 'application/json');
       const formData = new FormData(form);
 
       const obj = {};
       formData.forEach((value, key) => obj[key] = value);
 
-      request.send(JSON.stringify(obj));
-
-      request.addEventListener('load', () => {
-        if (request.status === 200) {
-          showThanksModal(message.success);
-          form.reset();
-          statusMessage.remove();
-        } else {
-          showThanksModal(message.failure);
-        }
+      fetch('server.php', {
+        method: 'POST',
+        headers: {
+         'Content-type': 'application/json'
+        },
+        body: JSON.stringify(obj)
+      })
+      .then(data => data.text())
+      .then(data => {
+        console.log(data);
+        showThanksModal(message.success);
+      })
+      .catch(() => {
+        showThanksModal(message.failure);
+      })
+      .finally(() => {
+        form.reset();
+        statusMessage.remove();
       });
+
     });
   };
 
