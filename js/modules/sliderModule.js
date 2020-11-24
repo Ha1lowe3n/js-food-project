@@ -64,6 +64,21 @@ const sliderModule = () => {
     dotsArr.push(dot);
   }
 
+  dotsArr.forEach(dot => {
+    dot.addEventListener('click', (e) => {
+      const slideTo = e.target.getAttribute('data-slide-to');
+
+      slideIndex = +slideTo;
+
+      offset = +width.slice(0, width.length - 2) * (slideTo - 1);
+
+      slidesField.style.transform = `translateX(-${offset}px)`;
+
+      currentSlideNumber();
+      activeDot();
+    });
+  });
+
   next.addEventListener('click', () => {
     if (offset === +width.slice(0, width.length - 2) * (slides.length - 1)) {
       offset = 0;
@@ -102,19 +117,6 @@ const sliderModule = () => {
     activeDot();
   });
 
-  dotsArr.forEach(dot => {
-    dot.addEventListener('click', (e) => {
-      const slideTo = e.target.getAttribute('data-slide-to');
-
-      slideIndex = slideTo;
-      offset = +width.slice(0, width.length - 2) * (slideTo - 1);
-
-      slidesField.style.transform = `translateX(-${offset}px)`;
-
-      currentSlideNumber();
-      activeDot();
-    });
-  });
 };
 
 export default sliderModule;

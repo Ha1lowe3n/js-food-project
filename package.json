@@ -17,7 +17,20 @@
     "url": "https://github.com/Ha1lowe3n/js-food-project/issues"
   },
   "homepage": "https://github.com/Ha1lowe3n/js-food-project#readme",
+  "browserslist": [
+    "> 1%",
+    "not dead"
+  ],
   "devDependencies": {
-    "json-server": "^0.16.3"
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "babel-loader": "^8.1.0",
+    "core-js": "^3.6.5",
+    "json-server": "^0.16.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1"
   }
 }
